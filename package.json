@@ -1,0 +1,34 @@
+{
+  "name": "challenge-peya-api",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "npx nodemon ./bin/www",
+    "test": "jest"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "~4.16.1",
+    "express-session": "^1.17.0",
+    "helmet": "^3.21.3",
+    "http-errors": "~1.6.3",
+    "jade": "~1.11.0",
+    "lodash": "^4.17.15",
+    "morgan": "~1.9.1",
+    "node-cache": "^5.1.0",
+    "winston": "^3.2.1"
+  },
+  "main": "app.js",
+  "devDependencies": {
+    "jest": "^25.1.0"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "author": "Ferrari Federico (federico.d.ferrari@gmail.com)",
+  "license": "ISC",
+  "description": "Challenge PeYa"
+}
