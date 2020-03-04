@@ -8,26 +8,30 @@ module.exports = authService => {
           return next(createError(400, "Please, send the username to login."));
         if (!req.body.password)
           return next(createError(400, "Please, send the password to login."));
-        const appToken = await authService.getAppToken(
+        const responseAppToken = await authService.getAppToken(
           process.env.CLIENT_ID,
           process.env.CLIENT_SECRET
         );
-        const userToken = await authService.getUserToken(
-          appToken,
+        const responseUserToken = await authService.getUserToken(
+          responseAppToken.data.access_token,
           req.body.username,
           req.body.password
         );
-        const user = await authService.getUser(userToken.access_token);
+        const responseUser = await authService.getUser(responseUserToken.data.access_token);
+        const user = responseUser.data;
         user.ttl = process.env.DEFAULT_TTL;
         req.session.user = user;
-        //res.header("x-access-token",  userToken.access_token);
+        //res.header("x-access-token",  responseUserToken.data.access_token);
         res.json({
           user: user,
-          access_token: userToken.access_token
+          access_token: responseUserToken.data.access_token
         });
       } catch (err) {
         next(err);
       }
+    },
+    getUser: (req, res, next) =>{
+        res.json(req.session.user);
     },
     logout: (req, res, next) => {
       req.session.destroy();

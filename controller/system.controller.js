@@ -12,6 +12,10 @@ module.exports = systemService => {
         .catch(err => {
           return next(err);
         });
+    },
+    updateUser: (req, res, next) => {
+      req.session.user.ttl = req.body.ttl;
+      res.json(req.session.user);
     }
   };
   return controller;

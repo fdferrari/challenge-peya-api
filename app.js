@@ -45,7 +45,7 @@ if (env === "development") {
         cb(null, corsUrls.includes("*") || corsUrls.includes(origin)),
       credentials: true,
       methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE", "OPTIONS"],
-      allowedHeaders: ["Content-Type", "Authorization"]
+      allowedHeaders: ["Content-Type", "Authorization", "x-access-token"]
     })
   );
 }
@@ -78,16 +78,17 @@ const ApiController = require("./controller/api.controller")(
 //check if cookie is saved in browser and user is not set
 app.use(require("./middlewares/cookie.clear.handler"));
 
-app.post("/login", AuthController.login);
-app.get("/logout", AuthController.logout);
-app.get("/about", SystemController.about);
-app.get("/health", SystemController.health);
+app.post("/api/login", AuthController.login);
+app.get("/api/logout", AuthController.logout);
+app.get("/api/about", SystemController.about);
+app.get("/api/health", SystemController.health);
 
 // protected routes api
 app.use(require("./middlewares/auth.handler"));
 
+app.get("/api/user", AuthController.getUser);
+app.put("/api/user", SystemController.updateUser);
 app.get("/api/search", ApiController.validateSearch, ApiController.search);
-//TODO: add endpoint to set ttl in user session
 
 // error handler
 app.use(require("./middlewares/error.handler"));

@@ -36,6 +36,7 @@ module.exports = (apiService, cacheService) => {
         );
         const result = await apiService
           .getAllRestaurants(
+            req.headers["x-access-token"],
             country,
             point,
             predicateSorting.iteratees,

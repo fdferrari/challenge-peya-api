@@ -1,29 +1,49 @@
 const axios = require('axios');
-const CancelToken = axios.CancelToken;
 
-createAxios = (config = {}) => {
-  let axiosInstance = axios.create(config);
+const axiosInstance = axios.create({
+  withCredentials: true,
+  baseURL: process.env.API_PEYA,
+  timeout: 30 * 1000,
+  headers: {
+    "Content-Type": "application/json"
+  }
+});
 
-  //functions to change initial config
-  axiosInstance.changeDefault = (key, val) => {
-    axiosInstance.defaults[key] = val;
-  };
-  axiosInstance.changeHeader = (key, val) => {
-    axiosInstance.defaults.headers[key] = val;
-  };
-  return axiosInstance;
-};
+function addHeader(field, value) {
 
-createCancelToken = (executor) => {
-  return new CancelToken(executor);
-};
+  axiosInstance.defaults.headers.common[field] = '';
+  delete axiosInstance.defaults.headers.common[field];
 
-sourceCancel = () => {
-  return CancelToken.source();
-};
+  if (value) {
+    axiosInstance.defaults.headers.common[field] = '';
+    axiosInstance.defaults.headers.common[field] = `${value}`;
+  }
+}
+
+function getHeader(field) {
+  return axiosInstance.defaults.headers.common[field];
+}
+
+function get(url, params, headers) {
+  return axiosInstance.get(url, { params: params || {}, headers: headers || {}, withCredentials: true });
+}
+
+function post(url, body) {
+  return axiosInstance.post(url, body);
+}
+
+function put(url, body) {
+  return axiosInstance.put(url, body);
+}
+
+function deletex(url, body) {
+  return axiosInstance.delete(url, { params: body });
+}
+
+function setValidator(validator) {
+  axiosInstance.interceptors.response.use(validator);
+}
 
 module.exports = {
-  createAxios: createAxios,
-  createCancelToken: createCancelToken,
-  sourceCancel: sourceCancel
+  addHeader, getHeader, get, post, put, deletex, setValidator
 };
