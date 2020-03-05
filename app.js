@@ -54,8 +54,10 @@ if (env === "development") {
  * services
  */
 
-const authService = require("./services/auth.service");
-const apiService = require("./services/api.service");
+const { get } = require("./helpers/AxiosFactory");
+
+const authService = require("./services/auth.service")(get);
+const apiService = require("./services/api.service")(get);
 const cacheService = require("./services/cache.service");
 const systemService = require("./services/system.service");
 /*

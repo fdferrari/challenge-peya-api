@@ -1,0 +1,182 @@
+{
+  "swagger": "2.0",
+  "version": "1.0.0",
+  "schemes": [
+    "http"
+  ],
+  "info": {
+    "title": "Challenge-PeYa",
+    "version": "1.0.0",
+    "description": "No description",
+    "host": "localhost"
+  },
+  "paths": {
+    "/api/about": {
+      "get": {
+        "summary": "ABOUT",
+        "tags": [
+          "default"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          null
+        ]
+      }
+    },
+    "/api/health": {
+      "get": {
+        "summary": "HEALTH",
+        "tags": [
+          "default"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          null
+        ]
+      }
+    },
+    "/api/login": {
+      "post": {
+        "summary": "LOGIN",
+        "tags": [
+          "default"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "example": "application/json"
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "example": {
+              "username": "insert_username",
+              "password": "insert_password"
+            },
+            "properties": {
+              "username": {
+                "description": "",
+                "example": "insert_username",
+                "type": "string"
+              },
+              "password": {
+                "description": "",
+                "example": "insert_password",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        ]
+      }
+    },
+    "/api/search": {
+      "get": {
+        "summary": "SEARCH",
+        "tags": [
+          "default"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "example": "123"
+          },
+          null
+        ]
+      }
+    },
+    "/api/user": {
+      "get": {
+        "summary": "USER",
+        "tags": [
+          "default"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "example": "123"
+          },
+          null
+        ]
+      },
+      "put": {
+        "summary": "CHANGE TTL",
+        "tags": [
+          "default"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "example": "123"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "example": "application/json"
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "example": {
+              "ttl": "120"
+            },
+            "properties": {
+              "ttl": {
+                "description": "",
+                "example": "120",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        ]
+      }
+    },
+    "/api/logout": {
+      "get": {
+        "summary": "LOGOUT",
+        "tags": [
+          "default"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          null
+        ]
+      }
+    }
+  }
+}

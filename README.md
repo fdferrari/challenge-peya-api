@@ -25,6 +25,23 @@ Para ejecutar la aplicación, es necesario tener instalado en su sistema lo sigu
 - [Node.JS](https://nodejs.org/en/) (>= v8.11.3)
 - [NPM](https://www.npmjs.com/get-npm) (>= v5.6.0)
 
+### API Documentation
+
+La documentación de la api se encuentra en el directorio ./docs:
+
+* Challenge-PeYa.postman_collection.json
+* swagger-challenge.json
+
+Los endpoints a consumir son los siguientes:
+
+* [GET]   /api/about
+* [GET]   /api/health
+* [POST]  /api/login | body = {"username": "insert_username","password": "insert_password"}
+* [GET]   /api/search?country=&lat=&lng= | headers = {'x-access-token':123}
+* [GET]   /api/user | headers = {'x-access-token':123}
+* [PUT]   /api/user | body = {"ttl": 120} | headers = {'x-access-token':123}
+* [GET]   /api/logout
+
 ### Folder Structure
 
 ```
