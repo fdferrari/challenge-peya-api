@@ -2,7 +2,20 @@
 Esta API brinda los siguientes servicios:
 
 * Integración con Public API REST PeYa.
-* Almacenamiento en cache de búsquedas realizadas.
+* Almacenamiento en cache de búsquedas realizadas por un tiempo determinado configurable por el usuario.
+
+# Technological Stack 
+
+De acuerdo a la evaluación del sistema backend a desarrollar, se llega a la conclusión que la misma tiene como característica principal la recepción y envío de datos (operaciones I/O)  por sobre operaciones intensivas de CPU. Es así, que se propone construir una API REST utilizando **Node.JS** ya que esta tecnología va a permitir construir un sistema orientado a I/O, ligero, portable y fácil de escalar. A través del gestor de paquetes **NPM** (el cual viene instalado por defecto), se pueden incorporar fácilmente distintos componentes reutilizables para complementar el desarrollo. 
+
+Por otro lado, se añade el uso del framework web **Express** para trabajar de forma ágil en el manejo del protocolo HTTP.
+
+Como complemento se incorpora el uso de la librería **dotenv** para desacoplar del sistema todos aquellos parámetros que estén relacionados con el ambiente.
+
+# Pending Requirements
+
+* **Completar cobertura de tests**
+* **Endpoint REST con estadísticas de uso del aplicativo**: se entiende que para cumplir este requerimiento, una opción es poder almacenar del lado del backend la sesión del usuario a traves de un session store, como Redis, para cualquier instancia distribuida. 
 
 ## Getting Started
 Estas instrucciones le permitirá tener la aplicación funcionando en su máquina local con fines de desarrollo y pruebas.
@@ -10,6 +23,7 @@ Estas instrucciones le permitirá tener la aplicación funcionando en su máquin
 ### Prerequisities
 Para ejecutar la aplicación, es necesario tener instalado en su sistema lo siguiente:
 - [Node.JS](https://nodejs.org/en/) (>= v8.11.3)
+- [NPM](https://www.npmjs.com/get-npm) (>= v5.6.0)
 
 ### Folder Structure
 
@@ -24,7 +38,6 @@ challenge-peya-api/
   ├───doc/
   ├───helpers/
   |        AxiosFactory.js
-  |        AxiosInstance.js
   ├───middlewares/
   |        auth.handler.js
   |        cookie.clear.handler.js
@@ -78,12 +91,22 @@ npm install
 ```
 npm run start
 ```
+
+### Run test
+
+```
+npm run test
+```
 ## Built With
 
 * [Node.JS](https://nodejs.org/en/)
 * [Express](http://expressjs.com/)
+* [Node Cache](https://www.npmjs.com/package/node-cache)
 * [Axios](https://www.npmjs.com/package/axios)
 
 ## Authors
 
 * [Federico D. Ferrari](federico.d.ferrari@gmail.com)
+
+
+This project was bootstrapped with [Express Generator](https://www.npmjs.com/package/express-generator).
